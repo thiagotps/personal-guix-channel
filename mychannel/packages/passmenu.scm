@@ -1,4 +1,4 @@
-(define-module (mychannel mychannel passmenu)
+(define-module (mychannel packages passmenu)
   :use-module  (guix packages)
   :use-module  (guix git-download)
   :use-module  (guix gexp)

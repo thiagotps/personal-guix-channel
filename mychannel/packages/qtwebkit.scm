@@ -1,4 +1,4 @@
-(define-module (mychannel mychannel qtwebkit)
+(define-module (mychannel packages qtwebkit)
   :use-module ((guix licenses) #:prefix license:)
   :use-module (guix packages)
   :use-module (guix download)
