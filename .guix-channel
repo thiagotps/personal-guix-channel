@@ -1,3 +1,3 @@
 (channel
   (version 0)
-  (directory "mychannel"))
+  (url "file:///home/thiago/mychannel"))
