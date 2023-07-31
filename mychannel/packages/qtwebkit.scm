@@ -94,7 +94,7 @@
      (sha256
       (base32
        "1rm9sjkabxna67dl7myx9d9vpdyfxfdhrk9w7b94srkkjbd2d8cw"))
-     (patches (map (lambda (x) (string-append "/home/thiago/guix/patches/" x))
+     (patches (map (lambda (x) (string-append "patches/" x))
                    (list "qtwebkit-pbutils-include.patch"
                          "qtwebkit-fix-building-with-bison-3.7.patch"
                          "qtwebkit-fix-building-with-glib-2.68.patch"
