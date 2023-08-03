@@ -88,7 +88,7 @@
   :use-module (srfi srfi-1)
   )
 
-(define-public
+(define-public goldendict
   (package
     (name "goldendict")
     (version "1.5.0")
