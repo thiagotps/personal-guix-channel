@@ -3,6 +3,7 @@
   :use-module (guix packages)
   :use-module (guix download)
   :use-module (guix git-download)
+  :use-module  (guix build-system copy)
   :use-module (guix build-system cmake)
   :use-module (guix build-system gnu)
   :use-module (guix build-system meson)
@@ -120,3 +121,89 @@
     (synopsis "Feature-rich dictionary lookup program")
     (description "GoldenDict is a feature-rich dictionary lookup program, supporting multiple dictionary formats (StarDict/Babylon/Lingvo/Dictd/AARD/MDict/SDict) and online dictionaries, featuring perfect article rendering with the complete markup, illustrations and other content retained, and allowing you to type in words without any accents or correct case.")
     (license license:gpl3+)))
+
+
+(define guixlicense (@@ (guix licenses) license))
+
+(define* (unknow uri #:optional (comment ""))
+  "Return a unknow license."
+  (guixlicense "Unknow" uri comment))
+
+
+
+(define-public latin-blatt1997
+  (package
+    (name "latin-blatt1997")
+    (version "1.0")
+    (source (origin
+              (method url-fetch)
+              (uri (string-append "https://github.com/latin-dict/Blatt1997/releases/download/v1.0/Blatt1997-slob.zip"))
+              (sha256
+               (base32
+                "153yfpa25s1j49hl2mfqg0bqyyzxni4j7dn9d7b9k4d5nr3jnb5b"))))
+    (build-system copy-build-system)
+    (native-inputs (list unzip))
+
+    (arguments `(#:install-plan ,#~'(("Blatt1997-lat-lat.slob" "share/dict/") )))
+    (synopsis "Vademecum in opus Saxonis et alia opera Danica compendium ex indice verborum")
+    (description "Vademecum in opus Saxonis et alia opera Danica compendium ex indice verborum")
+    (home-page "https://latin-dict.github.io/dictionaries/Blatt1997.html")
+    ;; NOTE: The license of the work is unknow, but I'll put as public-domain for now.
+    (license (unknow home-page "Authorship belongs to Franz Blatt (1903-1979) and Reimer Hemmingsen (1922-1998)."))))
+
+(define-public latin-forcellini
+  (package
+    (name "latin-forcellini")
+    (version "1.3")
+    (source (origin
+              (method url-fetch)
+              (uri (string-append "https://github.com/latin-dict/Forcellini/releases/download/v1.3/Forcellini-html.zip"))
+              (sha256
+               (base32
+                "1r50730sh61f0bibvf7c3f44n7gip7cki2x5g1prv9rmqip0c5va"))))
+    (build-system copy-build-system)
+    (native-inputs (list unzip))
+
+    (arguments `(#:install-plan ,#~'(("index.html" "share/dict/forcellini/") ("assets" "share/dict/forcellini/") )))
+    (synopsis "Forcellinus Electronicus Novus")
+    (description "Forcellinus Electronicus Novus (see Sources) is a monolingual Latin dictionary, but most of the articles additionally have short translations into Italian, French, Spanish, German and English languages.")
+    (home-page "https://latin-dict.github.io/dictionaries/Forcellini.html")
+    (license license:public-domain)))
+
+(define-public latin-popma1865
+  (package
+    (name "latin-popma1865")
+    (version "1.0")
+    (source (origin
+              (method url-fetch)
+              (uri (string-append "https://github.com/latin-dict/Popma1865/releases/download/v1.0/Popma1865-slob.zip"))
+              (sha256
+               (base32
+                "00d2d4lh6wgw069p4biqdkxmmy16xvy91rh0vrgb7rw8y5ssh32s"))))
+    (build-system copy-build-system)
+    (native-inputs (list unzip))
+
+    (arguments `(#:install-plan ,#~'(("Popma1865-lat-lat.slob" "share/dict/"))))
+    (synopsis "De differentiis verborum, Popma (1865)")
+    (description "Dictionary of Latin synonyms (“osculum” vs “suavium”), homonyms (“arundo” vs “hirundo”), or paronymous words (“cedere” vs “accedere”) explained in Latin. There are rare articles dedicated to Ancient Greek (Ἔπαινος vs Ἐγκώμιον), and sparse Italian, French, or German commentaries.")
+    (home-page "https://latin-dict.github.io/dictionaries/Popma1865.html")
+    (license license:public-domain)))
+
+(define-public latin-richter1750
+  (package
+    (name "latin-richter1750")
+    (version "1.0")
+    (source (origin
+              (method url-fetch)
+              (uri (string-append "https://github.com/latin-dict/Richter1750/releases/download/v1.0/Richter1750-slob.zip"))
+              (sha256
+               (base32
+                "1cvb2v97bgc8bxix875s83kipv639czwi3cggln2spgx39hbjll3"))))
+    (build-system copy-build-system)
+    (native-inputs (list unzip))
+
+    (arguments `(#:install-plan ,#~'(("Richter1750-lat-lat.slob" "share/dict/"))))
+    (synopsis "Differentias quae in Ausonii Popmae De differentiis verborum libris amissae sunt")
+    (description "Adam Daniel Richter (1709-1782) was an editor of the Popma’s dictionary printed in 1741. In 1750, he published an addition with list of 62 groups of Latin “synonyms” (in wide sense of the word).")
+    (home-page "https://latin-dict.github.io/dictionaries/Richter1750.html")
+    (license license:public-domain)))
